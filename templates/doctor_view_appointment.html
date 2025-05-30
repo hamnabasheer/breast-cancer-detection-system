@@ -1,0 +1,74 @@
+{%include 'doctorheader.html'%}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Add Font Awesome for the download icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <center>
+    <table border="2" style="margin-top: 150px; width: 1200px;"  class="table table-hover">
+        <tr>
+            <th style="font-size: 25px; color: black; background-color: cadetblue;">SL.NO</th>
+            <th style="font-size: 25px; color: black; background-color: cadetblue;">First Name</th>
+            <th style="font-size: 25px; color: black; background-color: cadetblue;">Last Name</th>
+            <th style="font-size: 25px; color: black; background-color: cadetblue;">Date</th>
+            <th style="font-size: 25px; color: black; background-color: cadetblue;">status</th>
+
+            <th style="font-size: 25px; color: black; background-color: cadetblue;">File</th>
+
+       
+            <th style="font-size: 25px; color: black; background-color: cadetblue;"></th>
+
+        </tr>
+        {%for i in data['view']%}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{i['first_name']}}</td>
+            <td>{{i['last_name']}}</td>
+            <td>{{i['date']}}</td>
+            <td>{{i['out']}}</td>
+            <td>
+
+                {% if i['file'] %}
+                    {% if i['file'].endswith('.jpg') or i['file'].endswith('.png')  or i['file'].endswith('.jpeg') or i['file'].endswith('.JPG') %}
+                    <td>
+                        <img src="{{ i['file'] }}" alt="Not Image Uploaded" height="250px" width="250px">
+                        <td><a href="/doctor_add_image_report?id={{i['uploads_id']}}&img={{i['file']}}" class="btn btn-warning">Add Image Report</a></td>
+                    </td>
+                    {% elif i['file'].endswith('.wav') %}
+                
+                        <p>Unknown file type.</p>
+                    {% endif %}
+                {% endif %}
+
+   
+            </td>
+            {%if i['status']=='pending'%}
+            <td><a href="/doctor_add_prescription?id={{i['appointment_id']}}" class="btn btn-warning">Add prescription</a></td>
+        
+    
+
+            {%else%}
+            <td>{{i['status']}}</td>
+            {%endif%}
+        </tr>
+        {%endfor%}
+    </table>
+    <br><br>
+</center>
+</body>
+</html>
+<style>
+    .fas.fa-download:hover {
+        color: #004080;
+        transform: scale(1.2);
+        transition: all 0.3s ease;
+    }
+</style>
+
+{%include 'footer.html'%}

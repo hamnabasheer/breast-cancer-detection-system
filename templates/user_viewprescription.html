@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription Records</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Container for all cards */
+        .prescription-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Page title */
+        .page-title {
+            text-align: center;
+            color: #2c3e50;
+            margin: 20px 0;
+            font-size: 28px;
+        }
+        
+        /* Card grid layout */
+        .prescription-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        /* Individual prescription card */
+        .prescription-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .prescription-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        /* Card header with number */
+        .card-header {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* Card content area */
+        .card-content {
+            padding: 15px;
+        }
+        
+        /* Info row within card */
+        .info-row {
+            margin-bottom: 12px;
+        }
+        
+        /* Label for each data field */
+        .info-label {
+            font-weight: bold;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+        
+        /* Value display */
+        .info-value {
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        
+        /* Date styling */
+        .date-section {
+            text-align: right;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 15px;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+{%include 'user_header.html'%}
+
+<br><br><br><br><br><br><br><br>
+
+<div class="prescription-container">
+    <h1 class="page-title">Prescription Records</h1>
+    
+    <div class="prescription-grid">
+        {%for i in data['view']%}
+        <div class="prescription-card">
+            <div class="card-header">
+                Prescription #{{loop.index}}
+            </div>
+            <div class="card-content">
+                <div class="info-row">
+                    <div class="info-label">Prescription</div>
+                    <div class="info-value">{{i['prescription']}}</div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Medicine</div>
+                    <div class="info-value">{{i['medicine']}}</div>
+                </div>
+                
+                <div class="date-section">
+                    <span>{{i['pre_date']}}</span>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
+
+{%include 'footer.html'%}
+
+</body>
+</html>

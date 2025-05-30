@@ -1,0 +1,118 @@
+
+
+
+{%include 'user_header.html'%}
+
+<br><br><br><br><br><br><br><br>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Styled Upload Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 60%;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        input[type="file"],
+        input[type="date"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <th>Upload Image</th>
+                <td><input type="file" name="image"></td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td><input type="date" name="date"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;"><input type="submit" name="add"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>
+
+<!-- <form action="" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <th>Upolad Image</th>
+            <td><input type="file" name="image" ></td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td><input type="date" name="date" ></td>
+        </tr>
+        <tr>
+            <td><input type="submit" name="add" ></td>
+        </tr>
+    </table>
+</form>
+
+
+
+ -->

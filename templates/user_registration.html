@@ -1,0 +1,160 @@
+
+
+
+
+<style>
+    /* Form styling */
+    form {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th {
+      text-align: left;
+      padding: 10px;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    td {
+      padding: 10px;
+    }
+    
+    input[type="text"], 
+    input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+      display: block;
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form');
+      
+      form.addEventListener('submit', function(event) {
+        // Clear previous error messages
+        document.querySelectorAll('.error').forEach(el => el.remove());
+        
+        let hasError = false;
+        
+        // Validate First Name
+        const fname = form.querySelector('input[name="fname"]');
+        if (!fname.value.trim()) {
+          addError(fname, 'First name is required');
+          hasError = true;
+        }
+        
+        // Validate Last Name
+        const lname = form.querySelector('input[name="lname"]');
+        if (!lname.value.trim()) {
+          addError(lname, 'Last name is required');
+          hasError = true;
+        }
+        
+        // Validate Place
+        const place = form.querySelector('input[name="place"]');
+        if (!place.value.trim()) {
+          addError(place, 'Place is required');
+          hasError = true;
+        }
+        
+        // Validate Username
+        const username = form.querySelector('input[name="username"]');
+        if (!username.value.trim()) {
+          addError(username, 'Username is required');
+          hasError = true;
+        } else if (username.value.length < 4) {
+          addError(username, 'Username must be at least 4 characters');
+          hasError = true;
+        }
+        
+        // Validate Password
+        const password = form.querySelector('input[name="pass"]');
+        if (!password.value) {
+          addError(password, 'Password is required');
+          hasError = true;
+        } else if (password.value.length < 6) {
+          addError(password, 'Password must be at least 6 characters');
+          hasError = true;
+        }
+        
+        if (hasError) {
+          event.preventDefault();
+        }
+      });
+      
+      function addError(element, message) {
+        const errorElement = document.createElement('span');
+        errorElement.className = 'error';
+        errorElement.textContent = message;
+        element.parentNode.appendChild(errorElement);
+      }
+    });
+  </script>
+  
+  <!-- Your original form content here, without changes to header and footer -->
+  {%include 'publicheader.html'%}
+  <br><br><br><br><br><br><br><br>
+  <form action="" method="post">
+      <table>
+          <tr>
+              <th>First Name</th>
+              <td><input type="text" name="fname"></td>
+          </tr>
+          <tr>
+              <th>Last Name</th>
+              <td><input type="text" name="lname" id=""></td>
+          </tr>
+          <tr>
+              <th>Place</th>
+              <td><input type="text" name="place" id=""></td>
+          </tr>
+          <tr>
+              <th>User Name</th>
+              <td><input type="text" name="username" ></td>
+          </tr>
+          <tr>
+              <th>Password</th>
+              <td><input type="password" name="pass" ></td>
+          </tr>
+          <tr>
+              <th><input type="submit" name="add" value="Register"></th>
+          </tr>
+      </table>
+  </form>
+  {%include 'footer.html'%}

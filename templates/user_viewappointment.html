@@ -1,0 +1,47 @@
+{% include 'user_header.html' %}
+
+<center>
+    <br><br><br><br><br><br><br><br>
+
+    <table border="2">
+        <tr>
+            <th>Sl.no</th>
+            <th>Date</th>
+            <!-- <th>Status</th> -->
+            <th>File</th>
+            <th>Audio</th>
+            <th>Actions</th>
+        </tr>
+        {% for i in data['view'] %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ i['date'] }}</td>
+            <!-- <td>{{ i['status'] }}</td> -->
+            
+            <td>
+
+                {% if i['file'] %}
+                    {% if i['file'].endswith('.jpg') or i['file'].endswith('.png')  or i['file'].endswith('.jpeg') or i['file'].endswith('.JPG') %}
+                    <td>
+                        <img src="{{ i['file'] }}" alt="Not Image Uploaded" height="250px" width="250px">
+                    </td>
+     
+                   
+                    {% endif %}
+                {% endif %}
+
+   
+            </td>
+            <td>
+                <a href="/viewappointment_image?up_id={{ i['uploads_id'] }}">View Result</a> |
+                <a href="/viewprescription?id={{ i['appointment_id'] }}">View Prescription</a> |
+                <!-- <a href="/user_add_review?doctors_id={{ i['doctors_id'] }}">Add Review</a> -->
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br><br><br><br><br><br><br><br>
+</center>
+
+{% include 'footer.html' %}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            width: 30%;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        
+        /* Star Rating */
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+        
+        .star-rating input {
+            display: none;
+        }
+        
+        .star-rating label {
+            color: #ddd;
+            font-size: 30px;
+            padding: 0 5px;
+            cursor: pointer;
+        }
+        
+        .star-rating label:hover,
+        .star-rating label:hover ~ label,
+        .star-rating input:checked ~ label {
+            color: #ffd700;
+        }
+        
+        .rating-text {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    {% include 'user_header.html' %}
+
+    <br><br><br><br><br><br><br><br>
+    
+    <div class="container">
+        <form action="" method="post">
+            <table>
+                <tr>
+                    <th>Review description</th>
+                    <td><input type="text" name="review" placeholder="Write your review here"></td>
+                </tr>
+                
+                <tr>
+                    <th>Rating</th>
+                    <td>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+                            <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+                            <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+                            <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+                            <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+                        </div>
+                        <input type="text" class="rating-text" name="rating">
+                    </td>
+                </tr>
+                
+                <tr>
+                    <th><input type="submit" name="add" value="Submit Review"></th>
+                </tr>
+            </table>
+        </form>
+    </div>
+    
+    {% include 'footer.html' %}
+    
+    <script>
+        // Script to update the hidden rating field when stars are clicked
+        document.addEventListener('DOMContentLoaded', function() {
+            const starLabels = document.querySelectorAll('.star-rating label');
+            const ratingText = document.querySelector('.rating-text');
+            
+            starLabels.forEach(label => {
+                label.addEventListener('click', function() {
+                    const forAttr = this.getAttribute('for');
+                    const ratingValue = document.getElementById(forAttr).value;
+                    ratingText.value = ratingValue;
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{%include 'user_header.html'%}
+
+
+    <center>
+        <table border="2" style="margin-top: 150px; width: 800px;" class="table table-hover">
+            <tr>
+                <th style="font-size: 25px;">SL.NO</th>
+                <th style="font-size: 25px;">DISEASE</th>
+                <th></th>
+
+
+            </tr>
+            {%for i in data['view']%}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{i['disease']}}</td>
+                <td> <a href="/viewdsymptoms?diseaseid={{i['disease_id']}}" class="btn btn-info">View symptoms</a>
+                    <a href="/viewdmedicine?diseaseid={{i['disease_id']}}" class="btn btn-primary">View Medicine</a>
+                </td>
+            </tr>
+            {%endfor%}
+        </table>
+
+    </center>
+    <br><br><br><br><br>
+</body>
+
+</html>
+<style>
+    body {
+        background-image: url('/static/assets/img/image2.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+
+
+{%include 'footer.html'%}

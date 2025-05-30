@@ -1,0 +1,211 @@
+<style>
+    /* Container for the cards */
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    
+    /* Individual doctor card */
+    .doctor-card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 280px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .doctor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Card header with doctor number */
+    .card-header {
+      background: #4682B4;
+      color: white;
+      padding: 10px 15px;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    /* Card content */
+    .card-content {
+      padding: 15px;
+    }
+    
+    /* Doctor name */
+    .doctor-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    
+    /* Info item in card */
+    .info-item {
+      margin-bottom: 8px;
+      display: flex;
+    }
+    
+    .info-label {
+      font-weight: 600;
+      width: 70px;
+      color: #555;
+    }
+    
+    .info-value {
+      color: #333;
+      word-break: break-word;
+    }
+    
+    /* Search bar styling */
+    .search-container {
+      max-width: 500px;
+      margin: 20px auto 30px;
+      text-align: center;
+    }
+    
+    .search-box {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: box-shadow 0.3s;
+    }
+    
+    .search-box:focus {
+      outline: none;
+      border-color: #4682B4;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    /* No results message */
+    .no-results {
+      text-align: center;
+      padding: 30px;
+      font-size: 18px;
+      color: #666;
+      width: 100%;
+      background: #f9f9f9;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    
+    /* Appointment link */
+    .appointment-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      background: #4CAF50;
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    
+    .appointment-link:hover {
+      background: #45a049;
+    }
+    
+    /* Responsive styling */
+    @media screen and (max-width: 768px) {
+      .card-container {
+        padding: 0 10px;
+      }
+      
+      .doctor-card {
+        width: 100%;
+        max-width: 340px;
+      }
+      
+      .search-container {
+        padding: 0 15px;
+      }
+    }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Search functionality
+      const searchBox = document.getElementById('doctor-search');
+      const doctorCards = document.querySelectorAll('.doctor-card');
+      const noResultsElement = document.getElementById('no-results');
+      
+      searchBox.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        let resultsFound = 0;
+        
+        // Filter cards
+        doctorCards.forEach(card => {
+          const doctorName = card.querySelector('.doctor-name').textContent.toLowerCase();
+          if (doctorName.includes(searchTerm)) {
+            card.style.display = 'block';
+            resultsFound++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Show/hide no results message
+        if (resultsFound === 0) {
+          noResultsElement.style.display = 'block';
+        } else {
+          noResultsElement.style.display = 'none';
+        }
+      });
+    });
+  </script>
+  
+  {%include 'user_header.html'%}
+  
+  <br><br><br><br><br><br><br><br>
+  
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="doctor-search" class="search-box" placeholder="Search doctor by name...">
+  </div>
+  
+  <!-- Card View -->
+  <div class="card-container">
+    {%for i in data['view']%}
+    <div class="doctor-card">
+      <div class="card-header">
+        <span>Doctor #{{loop.index}}</span>
+      </div>
+      <div class="card-content">
+        <div class="doctor-name">Dr. {{i['first_name']}} {{i['last_name']}}</div>
+        <div class="info-item">
+          <div class="info-label">Place:</div>
+          <div class="info-value">{{i['place']}}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Phone:</div>
+          <div class="info-value">{{i['phone']}}</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Email:</div>
+          <div class="info-value">{{i['email']}}</div>
+        </div>
+        <a href="/user_make_appointment?doctors_id={{i['doctors_id']}}" class="appointment-link">Make Appointment</a>
+      </div>
+    </div>
+    {%endfor%}
+    
+    <!-- No results message -->
+    <div id="no-results" class="no-results" style="display: none;">
+      No doctors found matching your search.
+    </div>
+  </div>
+  
+  {%include 'footer.html'%}

@@ -1,0 +1,67 @@
+
+
+{%include 'publicheader.html'%} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medease Companion</title>
+</head>
+<style>
+    body{
+        background-image: url('/static/assets/img/doctorreg.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    th{
+        padding: 15px;
+    }
+</style>
+<body>
+    <center>
+
+<h1>DOCTOR REGISTRATION</h1>
+    <form action="" method="post" style="margin-top: 140px;">
+        <table>
+            <tr>
+                <th style="font-size: 25px;">FIRST NAME</th>
+                <td><input type="text" name="fname" required="" class="form-control" style="width: 300px; height: 53px;"></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px;">LAST NAME</th>
+                <td><input type="text" name="lname" required="" class="form-control" style="width: 300px; height: 53px;"></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px;">PLACE </th>
+                <td><input type="text" name="place"  required="" class="form-control" style="width: 300px; height: 53px;"></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px;">PHONE</th>
+                <td><input type="text" name="phone"  required="" class="form-control" style="width: 300px; height: 53px;"></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px;">EMAIL</th>
+                <td><input type="email" name="mail"  required="" class="form-control" style="width: 300px; height: 53px;"></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px;">USERNAME</th>
+                <td><input type="text" name="uname"  required="" class="form-control" style="width: 300px; height: 53px;"></td>
+            </tr>
+            <tr>
+                <th style="font-size: 25px;">PASSWORD</th>
+                <td><input type="password" name="pwd"  required="" class="form-control" style="width: 300px; height: 53px;"></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="3"><input type="submit" value="register" name="reg" class="btn btn-success" style="margin-top: 15px;"></td>
+            </tr>
+        </table>
+    </form>
+    <br><br><br>  <br><br><br>
+
+</center>   
+
+
+  
+{%include 'footer.html'%}

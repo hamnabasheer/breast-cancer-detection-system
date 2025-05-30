@@ -1,0 +1,50 @@
+
+{%include 'adminheader.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medease Companion</title>
+</head>
+<body>
+<center>
+    <form action="" method="post">
+        <table border="2" style="margin-top: 150px; width: 800px;"  class="table table-hover">
+            <tr>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);background-color: rgba(127, 255, 212, 0.792);">SL.NO</th>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);background-color: rgba(127, 255, 212, 0.792);">Name</th>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);background-color: rgba(127, 255, 212, 0.792);">Place</th>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);background-color: rgba(127, 255, 212, 0.792);">ENQUIRY</th>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);background-color: rgba(127, 255, 212, 0.792);">DATE</th>
+                <th style="font-size: 25px; color: rgb(0, 0, 0);background-color: rgba(127, 255, 212, 0.792);">REPLY</th>
+            </tr>
+            {%for i in data['view']%}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{i['first_name']}} {{i['last_name']}}</td>
+                <td>{{i['place']}}</td>
+                <td>{{i['enquiry']}}</td>
+                <td>{{i['date']}}</td>
+                {%if i['reply']=='pending'%}
+                <td><a href="/adminsendenquiry?id={{i['enquiry_id']}}" class="btn btn-outline-info">Send Reply</a></td>
+                {%else%}
+                <td>{{i['reply']}}</td>
+                {%endif%}
+            </tr>
+            {%endfor%}
+        </table>
+    </form>
+    <br><br>
+</center>
+
+</body>
+</html>
+<style>
+    body{
+        background-image: url('/static/assets/img/image2.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+{%include 'footer.html'%}

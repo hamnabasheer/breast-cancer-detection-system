@@ -1,0 +1,37 @@
+
+
+{%include 'user_header.html'%}
+
+
+
+    <center>
+    <table border="2" style="margin-top: 150px; width: 800px;"  class="table table-hover">
+        <tr>
+            <th style="font-size: 25px;">SL.NO</th>
+            <th style="font-size: 25px;"> SYMPTOMS</th>
+         
+        </tr>
+        {%for i in data['view']%}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{i['symptoms']}}</td>
+
+        </tr>
+        {%endfor%}
+    </table>
+
+</center>
+</body>
+</html>
+
+
+<style>
+    body{
+        background-image: url('/static/assets/img/image2.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+
+
+{%include 'footer.html'%}
